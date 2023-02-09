@@ -26,7 +26,7 @@ def getLabel(label, type='single'):
 
     driver.get(baseUrl.format(label, 'undefined',index))
     driver.implicitly_wait(5)
-  
+
     # Find all elements using driver.find_elements where class matches "nav-link"
     # This is used to find all subcategories
     elems = driver.find_elements("class name","nav-link")
@@ -64,10 +64,10 @@ def getLabel(label, type='single'):
                     href = elem.get_attribute("href")
                     if (href.startswith('https://etherscan.io/address/')):
                         addressList.append(href[addrIndex:])
-            
+
                 # Replace address column in newTable dataframe with addressList
                 curTable['Address'] = addressList
-            except Exception as e: 
+            except Exception as e:
                 print(e)
                 print(label, "Skipping label due to error")
                 return
@@ -152,8 +152,9 @@ def getAllLabels():
 
 # Large size: Eth2/gnsos , Bugged: Liqui , NoData: Remaining labels
 ignore_list = ['eth2-depositor', 'gnosis-safe-multisig', 'liqui.io', 'education', 'electronics',
-               'flashbots', 'media', 'music', 'network', 'prediction-market', 'real-estate', 'vpn', 'beacon-depositor','uniswap']
-with open('config.json', 'r') as f:
+               'flashbots', 'media', 'music', 'network', 'prediction-market', 'real-estate', 'vpn', 'beacon-depositor']
+with open('sample.config.json', 'r') as f:
+
     config = json.load(f)
 
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
